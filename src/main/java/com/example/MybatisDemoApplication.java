@@ -70,6 +70,7 @@ public class MybatisDemoApplication {
 		};
 	}
 
+	@org.springframework.context.annotation.Configuration
 	@MapperScan(basePackages = "com.example.mapper.ds1", sqlSessionFactoryRef = "sqlSessionFactory")
 	static class Ds1Configuration {
 		private final MyBatisConfigurationSupport support;
@@ -84,12 +85,13 @@ public class MybatisDemoApplication {
 		}
 
 		@Bean
-		public SqlSessionFactoryBean sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource) {
-			return support.createSqlSessionFactoryBean(dataSource);
+		public SqlSessionFactoryBean sqlSessionFactory() {
+			return support.createSqlSessionFactoryBean(dataSource());
 		}
 
 	}
 
+	@org.springframework.context.annotation.Configuration
 	@MapperScan(basePackages = "com.example.mapper.ds2", sqlSessionFactoryRef = "sqlSessionFactory2")
 	static class Ds2Configuration {
 		private final MyBatisConfigurationSupport support;
@@ -104,8 +106,8 @@ public class MybatisDemoApplication {
 		}
 
 		@Bean
-		public SqlSessionFactoryBean sqlSessionFactory2(@Qualifier("dataSource2") DataSource dataSource) {
-			return support.createSqlSessionFactoryBean(dataSource);
+		public SqlSessionFactoryBean sqlSessionFactory2() {
+			return support.createSqlSessionFactoryBean(dataSource2());
 		}
 
 	}
