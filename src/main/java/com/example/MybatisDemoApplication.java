@@ -117,9 +117,9 @@ public class MybatisDemoApplication {
 		private final MybatisProperties myBatisProperties;
 		private final ResourceLoader resourceLoader;
 
-		public MyBatisConfigurationSupport(DataSourceProperties dsProperties, MybatisProperties myBatisProperties,
+		public MyBatisConfigurationSupport(DataSourceProperties dataSourceProperties, MybatisProperties myBatisProperties,
 				ResourceLoader resourceLoader) {
-			this.dataSourceProperties = dsProperties;
+			this.dataSourceProperties = dataSourceProperties;
 			this.myBatisProperties = myBatisProperties;
 			this.resourceLoader = resourceLoader;
 		}
@@ -132,7 +132,7 @@ public class MybatisDemoApplication {
 					.build();
 			ResourceDatabasePopulator populator = new ResourceDatabasePopulator(
 					resourceLoader.getResource("classpath:schema.sql"));
-			DatabasePopulatorUtils.execute(populator, dataSource);
+			populator.execute(dataSource);
 			return dataSource;
 		}
 
